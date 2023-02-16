@@ -1,15 +1,14 @@
-import React from 'react'
-import FilterData from './FilterData'
-import Header from './Header'
+import React from "react";
+import ApiData from "./ApiData";
+import FilterData from "./FilterData";
 
 const HomePage = () => {
-   
   return (
     <>
-      <Header/>
-      <FilterData/>
+      <ApiData/>
+      <FilterData />
     </>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

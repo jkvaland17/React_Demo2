@@ -1,8 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
+import Pagination from "./Pagination";
 
 const TableData = () => {
   const [data, setData] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [showPerPage, setshowPerPage] = useState(10);
+
+  //pagination start
+  const [pagination, setpagination] = useState({
+    start: 0,
+    end: showPerPage,
+  });
+  const onPagination = (start, end) => {
+    setpagination({ start: start, end: end });
+  };
+  //pagination end
+
   const header = ["No", "First Name", "Last Name", "Post", "City"];
   useEffect(() => {
     const respons = `https://63da3a9b19fffcd620c3dd70.mockapi.io/User`;
@@ -26,6 +40,7 @@ const TableData = () => {
   const reset = () => {
     window.location.reload(false);
   };
+
   return (
     <>
       <div className="table_data">
@@ -61,7 +76,7 @@ const TableData = () => {
             </tr>
           </thead>
           <tbody className="contain">
-            {data.map((item) => {
+            {data.slice(pagination.start, pagination.end).map((item) => {
               const { id, name, lastname, post, city } = item;
               return (
                 <tr key={id}>
@@ -76,15 +91,7 @@ const TableData = () => {
           </tbody>
         </Table>
       </div>
-      <div className="row_filter">
-        Page:
-        <select>
-          <option defaultValue="ALL">ALL</option>
-          <option>10</option>
-          <option>20</option>
-          <option>30</option>
-        </select>
-      </div>
+      <Pagination showPerPage={showPerPage} onPagination={onPagination} />
     </>
   );
 };

@@ -3,6 +3,7 @@
   padding: 1rem;
   justify-content: center;
   display: flex;
+  justify-content: space-between;
 }
 
 .table_data {
@@ -11,6 +12,7 @@
     gap: 2rem;
     justify-content: center;
     margin: 1rem 0;
+    
   }
   .contain {
     min-height: 1rem;

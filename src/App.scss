@@ -1,12 +1,18 @@
-.header{
-    cursor: pointer;
+.row_filter {
+  background-color: #dee2e6;
+  padding: 1rem;
+  justify-content: center;
+  display: flex;
 }
 
-
-
-.filter{
-    background-color: #dee2e6;
-    padding: 1rem;
-    justify-content: center;
+.table_data {
+  .table_functionality {
     display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+  .contain {
+    min-height: 1rem;
+  }
 }

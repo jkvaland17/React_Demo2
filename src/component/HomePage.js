@@ -1,12 +1,10 @@
 import React from "react";
-import ApiData from "./ApiData";
-import FilterData from "./FilterData";
+import TableData from "./TableData";
 
 const HomePage = () => {
   return (
     <>
-      <ApiData/>
-      <FilterData />
+      <TableData/>
     </>
   );
 };

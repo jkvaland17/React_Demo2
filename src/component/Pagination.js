@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Pagination = ({ showPerPage, onPagination }) => {
+const Pagination = ({ showPerPage, onPagination, total }) => {
   const [counter, setcounter] = useState(1);
   useEffect(() => {
     const value = showPerPage * counter;
@@ -12,17 +12,14 @@ const Pagination = ({ showPerPage, onPagination }) => {
     counter === 1 ? setcounter(1) : setcounter(counter - 1);
   };
   const next = () => {
-    setcounter(counter + 1);
+    Math.ceil(total / showPerPage) === counter
+      ? setcounter(counter)
+      : setcounter(counter + 1);
   };
+
   return (
     <div className="row_filter">
       <button onClick={previous}>Previous</button>
-      <select>
-        <option defaultValue="ALL">ALL</option>
-        <option>10</option>
-        <option>20</option>
-        <option>30</option>
-      </select>
       <button onClick={next}>Next</button>
     </div>
   );

@@ -1,9 +1,9 @@
 .row_filter {
+  width: 100%;
   background-color: #dee2e6;
   padding: 1rem;
   justify-content: center;
   display: flex;
-  justify-content: space-between;
 }
 
 .table_data {
@@ -16,5 +16,15 @@
   }
   .contain {
     min-height: 1rem;
+  }
+}
+
+.main_pagination{
+  display: flex;
+  .option_btn{
+    width: 100%;
+    background-color: #dee2e6;
+    padding: 1rem;
+    justify-content: center;
   }
 }

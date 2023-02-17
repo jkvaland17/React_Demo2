@@ -1,10 +1,10 @@
 import React from "react";
-import TableData from "./TableData";
+import DataTable from "./DataTable";
 
 const HomePage = () => {
   return (
     <>
-      <TableData/>
+      <DataTable/>
     </>
   );
 };

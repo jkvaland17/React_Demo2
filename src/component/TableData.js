@@ -4,28 +4,35 @@ import Pagination from "./Pagination";
 
 const TableData = () => {
   const [data, setData] = useState([]);
-  // eslint-disable-next-line no-unused-vars
-  const [showPerPage, setshowPerPage] = useState(10);
-
-  //pagination start
+  const [showPerPage, setshowPerPage] = useState(50);
   const [pagination, setpagination] = useState({
     start: 0,
     end: showPerPage,
   });
+
+  useEffect(() => {
+    async function fetchMyAPI() {
+      let response = await fetch(
+        "https://63da3a9b19fffcd620c3dd70.mockapi.io/User"
+      );
+      response = await response.json();
+      setData(response);
+    }
+    fetchMyAPI();
+  }, [setshowPerPage]);
+
+  const changeoptionpage = (event) => {
+    let pagevalue = Math.floor(event.target.value);
+    setshowPerPage(pagevalue);
+  };
+
+  //pagination start
   const onPagination = (start, end) => {
     setpagination({ start: start, end: end });
   };
   //pagination end
 
   const header = ["No", "First Name", "Last Name", "Post", "City"];
-  useEffect(() => {
-    const respons = `https://63da3a9b19fffcd620c3dd70.mockapi.io/User`;
-    fetch(respons)
-      .then((res) => res.json())
-      .then((user) => {
-        setData(user);
-      });
-  }, []);
 
   const SortBy = () => {
     "name";
@@ -91,7 +98,17 @@ const TableData = () => {
           </tbody>
         </Table>
       </div>
-      <Pagination showPerPage={showPerPage} onPagination={onPagination} />
+      <div className="main_pagination">
+        <Pagination showPerPage={showPerPage} onPagination={onPagination} />
+        <div className="option_btn">
+          <select onChange={changeoptionpage}>
+            <option value="50">ALL</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+          </select>
+        </div>
+      </div>
     </>
   );
 };

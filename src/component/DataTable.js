@@ -5,12 +5,11 @@ import Data from "../component/Data.json";
 
 const DataTable = () => {
   const [data, setData] = useState([]);
-  const [showPerPage, setshowPerPage] = useState(50);
+  const [showPerPage, setshowPerPage] = useState(10);
   const [pagination, setpagination] = useState({
     start: 0,
     end: showPerPage,
   });
-
   useEffect(() => {
     function fetchMyAPI() {
       let data = Data;
@@ -19,9 +18,9 @@ const DataTable = () => {
     fetchMyAPI();
   }, [setshowPerPage]);
 
-  const changeoptionpage = (event) => {
-    let pagevalue = Math.floor(event.target.value);
-    setshowPerPage(pagevalue);
+  const changeoptionpage = (e) => {
+    let optionValue = e.target.value;
+    setshowPerPage(Number(optionValue));
   };
 
   //pagination start
@@ -43,7 +42,7 @@ const DataTable = () => {
     );
   };
   const reset = () => {
-    window.location.reload(false);
+    window.location.reload();
   };
 
   return (
@@ -103,11 +102,11 @@ const DataTable = () => {
           total={data.length}
         />
         <div className="option_btn">
+          Page :
           <select onChange={changeoptionpage}>
-            <option value="50">ALL</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={30}>30</option>
           </select>
         </div>
       </div>

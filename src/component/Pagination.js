@@ -16,6 +16,7 @@ const Pagination = ({ showPerPage, onPagination, total }) => {
       ? setcounter(counter)
       : setcounter(counter + 1);
   };
+  //
 
   return (
     <div className="row_filter">

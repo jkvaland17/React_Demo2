@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import Pagination from "./Pagination";
 import Data from "../component/Data.json";
+//import FilterValue from "./FilterValue";
 
 const DataTable = () => {
   const [data, setData] = useState([]);
   const [showPerPage, setshowPerPage] = useState(10);
+  //const [filterValue, setFilterValue] = useState()
   const [pagination, setpagination] = useState({
     start: 0,
     end: showPerPage,
@@ -19,8 +21,7 @@ const DataTable = () => {
   }, [setshowPerPage]);
 
   const changeoptionpage = (e) => {
-    let optionValue = e.target.value;
-    setshowPerPage(Number(optionValue));
+    setshowPerPage(Number(e.target.value));
   };
 
   //pagination start
@@ -44,6 +45,10 @@ const DataTable = () => {
   const reset = () => {
     window.location.reload();
   };
+
+  // const onFilterValueSelected = (filterValue) => {
+  //   console.log(filterValue);
+  // };
 
   return (
     <>
@@ -108,8 +113,10 @@ const DataTable = () => {
             <option value={20}>20</option>
             <option value={30}>30</option>
           </select>
+          {/* <FilterValue onFilterValueSelected={onFilterValueSelected} /> */}
         </div>
       </div>
+      <div></div>
     </>
   );
 };

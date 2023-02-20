@@ -10,7 +10,9 @@ const PagePagination = ({
 }) => {
   // eslint-disable-next-line no-unused-vars
   const [counter, setcounter] = useState(1);
-  const [numberOfButtons, setNumberOfButoons] = useState(total / showPerPage);
+  const [numberOfButtons, setNumberOfButoons] = useState(
+    Math.ceil(total / showPerPage)
+  );
 
   useEffect(() => {
     const value = showPerPage * counter;

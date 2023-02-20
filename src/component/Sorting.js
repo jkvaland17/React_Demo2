@@ -3,6 +3,7 @@ import React from "react";
 const Sorting = ({ handleSort, reset }) => {
   return (
     <>
+    <div className="table_functionality">
       <div className="firstname">
         <input type="radio" name="sort" onClick={() => handleSort("name")} />
         <label>Sort by First Name</label>
@@ -15,6 +16,7 @@ const Sorting = ({ handleSort, reset }) => {
         <button type="reset" onClick={reset}>
           Reset
         </button>
+      </div>
       </div>
     </>
   );

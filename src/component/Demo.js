@@ -38,16 +38,10 @@ const Demo = () => {
   return (
     <>
       <div className="table_data">
-        <div className="table_functionality">
-          <Sorting handleSort={handleSort} reset={reset} />
-        </div>
+        <Sorting handleSort={handleSort} reset={reset} />
         <Table>
-          <thead>
-            <Header header={header} />
-          </thead>
-          <tbody className="contain">
-            <TableData filteredData={filteredData} />
-          </tbody>
+          <Header header={header} />
+          <TableData filteredData={filteredData} />
         </Table>
       </div>
       <div className="main_pagination">
@@ -58,9 +52,7 @@ const Demo = () => {
           page={page}
           setPage={setPage}
         />
-        <div className="option_btn">
-          <OptionData changeOption={changeOption} />
-        </div>
+        <OptionData changeOption={changeOption} />
       </div>
     </>
   );

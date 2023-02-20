@@ -1,78 +1,95 @@
-import React, { useEffect, useState } from "react";
-//Bootstrap
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState, useEffect } from "react";
+import { Table } from "react-bootstrap";
+import PagePagination from "./Pagination";
+import Data from "../component/Data.json";
 
-function Demo() {
-  //usestate hook
-  let [data, setData] = useState([]);
-  const [select, setselect] = useState("");
-
-  //custom data
-  var dataa = [
-    { id: 1, name: "Mike", city: "philps", state: "New York" },
-    { id: 2, name: "Steve", city: "Square", state: "Chicago" },
-    { id: 3, name: "Jhon", city: "market", state: "New York" },
-    { id: 4, name: "philps", city: "booket", state: "Texas" },
-    { id: 5, name: "smith", city: "brookfield", state: "Florida" },
-    { id: 6, name: "Broom", city: "old street", state: "Florida" },
-  ];
-
-  //Select onchage function, getting option selected value and save inside state variable
-  function handleChange(e) {
-    //set state variable with option value
-    setselect(e.target.value);
-  }
-
-  //hooks calls after rendering select state
+const Demo = () => {
+  const [data, setData] = useState([]);
+  const [showPerPage, setShowPerPage] = useState(10);
+  const [page, setPage] = useState();
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    data = dataa.filter((dataa) => dataa.state !== select);
+    setData(Data);
+  }, []);
 
-    //set state variable data after filteration
-    setData(data);
-  }, [select]);
+  const handleSort = (key) => {
+    setData([...data].sort((a, b) => a[key].localeCompare(b[key])));
+  };
 
-  //output
+  const reset = () => {
+    window.location.reload();
+  };
+  const changeOption = (e) => {
+    const pageValue = Number(e.target.value);
+    setShowPerPage(pageValue);
+  };
+  const filteredData = data.slice(page * showPerPage, (page + 1) * showPerPage);
+  const header = ["No", "First Name", "Last Name", "Post", "City"];
   return (
-    <div className="app container p-5">
-      <h1 className="text-center mb-5">
-        Reactjs Data Table with Custom Filters Using Hooks useEffect useState
-      </h1>
-      <div class="mb-3">
-        <label class="form-label">Exclude States Filter</label>
-        <select id="state" onChange={handleChange} class="form-select mb-5">
-          <option value="select Grade"> Exclude State </option>
-          <option value="New York">New York</option>
-          <option value="Florida">Florida</option>
-        </select>
+    <>
+      <div className="table_data">
+        <div className="table_functionality">
+          <div className="firstname">
+            <input
+              type="radio"
+              name="sort"
+              onClick={() => handleSort("name")}
+            />
+            <label>Sort by First Name</label>
+          </div>
+          <div className="lastname">
+            <input
+              type="radio"
+              name="sort"
+              onClick={() => handleSort("city")}
+            />
+            <label>Sort by City</label>
+          </div>
+          <div className="reset_btn">
+            <button type="reset" onClick={reset}>
+              Reset
+            </button>
+          </div>
+        </div>
+        <Table>
+          <thead>
+            <tr>
+              {header.map((item, index) => {
+                return <th key={index}>{item}</th>;
+              })}
+            </tr>
+          </thead>
+          <tbody className="contain">
+            {filteredData.map(({ id, name, lastname, post, city }) => (
+              <tr key={id}>
+                <td>{id}</td>
+                <td>{name}</td>
+                <td>{lastname}</td>
+                <td>{post}</td>
+                <td>{city}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </div>
-      <table class="table table-hover table-bordered p-5">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">City</th>
-            <th scope="col">State</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            // calling state variable data to filter data inside table
-            data.map(function ({ id, name, city, state }) {
-              return (
-                <tr>
-                  <td>{id}</td>
-                  <td>{name}</td>
-                  <td>{city}</td>
-                  <td>{state}</td>
-                </tr>
-              );
-            })
-          }
-        </tbody>
-      </table>
-    </div>
+      <div className="main_pagination">
+        <PagePagination
+          showPerPage={showPerPage}
+          onPagination={(start, end) => setPage(start / showPerPage)}
+          total={data.length}
+          page={page}
+          setPage={setPage}
+        />
+        <div className="option_btn">
+          Page :
+          <select onChange={changeOption}>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={30}>30</option>
+          </select>
+        </div>
+      </div>
+    </>
   );
-}
+};
 
-export default Demo
+export default Demo;

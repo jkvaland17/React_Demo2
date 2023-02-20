@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import Pagination from "./Pagination";
 import Data from "../component/Data.json";
-//import FilterValue from "./FilterValue";
 
 const DataTable = () => {
   const [data, setData] = useState([]);
   const [showPerPage, setshowPerPage] = useState(10);
-  //const [filterValue, setFilterValue] = useState()
+  const [page, setPage] = useState(0);
+  const [filterValue, setFilterValue] = useState([]);
   const [pagination, setpagination] = useState({
     start: 0,
     end: showPerPage,
+    show: 10,
   });
   useEffect(() => {
     function fetchMyAPI() {
@@ -18,7 +19,13 @@ const DataTable = () => {
       setData(data);
     }
     fetchMyAPI();
-  }, [setshowPerPage]);
+  }, []);
+
+  useEffect(() => {
+    setFilterValue(
+      data.slice(page * showPerPage, showPerPage + page * showPerPage)
+    );
+  }, [showPerPage, pagination, page, data]);
 
   const changeoptionpage = (e) => {
     setshowPerPage(Number(e.target.value));
@@ -36,19 +43,17 @@ const DataTable = () => {
     "name";
     "city";
   };
+
   const handleSort = (e) => {
     SortBy(e);
     setData((prevData) =>
       [...prevData].sort((a, b) => a[e].localeCompare(b[e]))
     );
   };
+
   const reset = () => {
     window.location.reload();
   };
-
-  // const onFilterValueSelected = (filterValue) => {
-  //   console.log(filterValue);
-  // };
 
   return (
     <>
@@ -85,7 +90,7 @@ const DataTable = () => {
             </tr>
           </thead>
           <tbody className="contain">
-            {data.slice(pagination.start, pagination.end).map((item) => {
+            {filterValue.map((item) => {
               const { id, name, lastname, post, city } = item;
               return (
                 <tr key={id}>
@@ -104,7 +109,9 @@ const DataTable = () => {
         <Pagination
           showPerPage={showPerPage}
           onPagination={onPagination}
-          total={data.length}
+          total={filterValue.length}
+          page={page}
+          setPage={setPage}
         />
         <div className="option_btn">
           Page :
@@ -113,7 +120,6 @@ const DataTable = () => {
             <option value={20}>20</option>
             <option value={30}>30</option>
           </select>
-          {/* <FilterValue onFilterValueSelected={onFilterValueSelected} /> */}
         </div>
       </div>
       <div></div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import Pagination from "./Pagination";
 
-const TableData = () => {
+const ApiData = () => {
   const [data, setData] = useState([]);
   const [showPerPage, setshowPerPage] = useState(50);
   const [pagination, setpagination] = useState({
@@ -113,4 +113,4 @@ const TableData = () => {
   );
 };
 
-export default TableData;
+export default ApiData;

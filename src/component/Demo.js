@@ -2,16 +2,27 @@ import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import PagePagination from "./Pagination";
 import Data from "../component/Data.json";
+import TableData from "../component/TableData";
+import Header from "../component/Header";
+import Sorting from "./Sorting";
+import OptionData from "./OptionData";
 
 const Demo = () => {
   const [data, setData] = useState([]);
   const [showPerPage, setShowPerPage] = useState(10);
   const [page, setPage] = useState();
+
   useEffect(() => {
     setData(Data);
   }, []);
+  console.log(page);
 
+  const SortBy = () => {
+    "name";
+    "city";
+  };
   const handleSort = (key) => {
+    SortBy(key);
     setData([...data].sort((a, b) => a[key].localeCompare(b[key])));
   };
 
@@ -28,46 +39,14 @@ const Demo = () => {
     <>
       <div className="table_data">
         <div className="table_functionality">
-          <div className="firstname">
-            <input
-              type="radio"
-              name="sort"
-              onClick={() => handleSort("name")}
-            />
-            <label>Sort by First Name</label>
-          </div>
-          <div className="lastname">
-            <input
-              type="radio"
-              name="sort"
-              onClick={() => handleSort("city")}
-            />
-            <label>Sort by City</label>
-          </div>
-          <div className="reset_btn">
-            <button type="reset" onClick={reset}>
-              Reset
-            </button>
-          </div>
+          <Sorting handleSort={handleSort} reset={reset} />
         </div>
         <Table>
           <thead>
-            <tr>
-              {header.map((item, index) => {
-                return <th key={index}>{item}</th>;
-              })}
-            </tr>
+            <Header header={header} />
           </thead>
           <tbody className="contain">
-            {filteredData.map(({ id, name, lastname, post, city }) => (
-              <tr key={id}>
-                <td>{id}</td>
-                <td>{name}</td>
-                <td>{lastname}</td>
-                <td>{post}</td>
-                <td>{city}</td>
-              </tr>
-            ))}
+            <TableData filteredData={filteredData} />
           </tbody>
         </Table>
       </div>
@@ -80,12 +59,7 @@ const Demo = () => {
           setPage={setPage}
         />
         <div className="option_btn">
-          Page :
-          <select onChange={changeOption}>
-            <option value={10}>10</option>
-            <option value={20}>20</option>
-            <option value={30}>30</option>
-          </select>
+          <OptionData changeOption={changeOption} />
         </div>
       </div>
     </>

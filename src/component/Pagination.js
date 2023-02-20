@@ -10,9 +10,7 @@ const PagePagination = ({
 }) => {
   // eslint-disable-next-line no-unused-vars
   const [counter, setcounter] = useState(1);
-  const [numberOfButtons, setNumberOfButoons] = useState(
-    Math.ceil(total / showPerPage)
-  );
+  const pageval = new Array(Math.ceil(total / showPerPage)).fill("");
 
   useEffect(() => {
     const value = showPerPage * counter;
@@ -23,25 +21,31 @@ const PagePagination = ({
     page === 0 ? setPage(0) : setPage(page - 1);
   };
   const next = () => {
-    total / showPerPage === page ? setPage(page) : setPage(page + 1);
-    console.log(page);
+    pageval === page ? setPage(page) : setPage(page + 1);
   };
-  //console.log(total /showPerPage);
   return (
-    <div className="row_filter">
-      <Pagination>
-        <Pagination.Prev onClick={previous} />
-        <Pagination.Item>{1}</Pagination.Item>
-        <Pagination.Item>{2}</Pagination.Item>
-        <Pagination.Item>{3}</Pagination.Item>
-        <Pagination.Item>{4}</Pagination.Item>
-        <Pagination.Item>{5}</Pagination.Item>
-        <Pagination.Next
-          onClick={next}
-          disabled={total / showPerPage === page}
-        />
-      </Pagination>
-    </div>
+    <>
+      <div className="row_filter">
+        <Pagination>
+          <Pagination.Prev onClick={previous} />
+          {pageval.map((el, index) => {
+            return (
+              <Pagination.Item
+                key={index}
+                onClick={() => setPage(index + 1)}
+                active={index + 1 === page ? "active" : null}
+              >
+                {index + 1}
+              </Pagination.Item>
+            );
+          })}
+          <Pagination.Next
+            onClick={next}
+            disabled={total / showPerPage === page}
+          />
+        </Pagination>
+      </div>
+    </>
   );
 };
 

@@ -1,10 +1,10 @@
 import React from "react";
-const Header = ({header}) => {
+const Header = ({row}) => {
   return (
     <>
     <thead>
       <tr>
-        {header.map((item, index) => {
+        {row.map((item, index) => {
           return <th key={index}>{item}</th>;
         })}
       </tr>

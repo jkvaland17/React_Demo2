@@ -1,12 +1,10 @@
 import React from "react";
-//import DataTable from "./DataTable";
-import Demo from "../component/Demo";
+import CustomeTable from "./CustomeTable";
 
 const HomePage = () => {
   return (
     <>
-      {/* <DataTable/> */}
-      <Demo/>
+      <CustomeTable />
     </>
   );
 };

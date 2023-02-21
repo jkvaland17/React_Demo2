@@ -11,6 +11,7 @@ const TableData = ({ data, page, showPerPage }) => {
               <td>{name}</td>
               <td>{lastname}</td>
               <td>{post}</td>
+              <td>{city}</td>
             </tr>
           ))}
         </tbody>

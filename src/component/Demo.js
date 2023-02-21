@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "react-bootstrap";
 import PagePagination from "./Pagination";
 import Data from "../component/Data.json";
 import TableData from "../component/TableData";
 import Header from "../component/Header";
 import Sorting from "./Sorting";
-import OptionData from "./OptionData";
 
 const Demo = () => {
   const [data, setData] = useState([]);
@@ -15,7 +13,6 @@ const Demo = () => {
   useEffect(() => {
     setData(Data);
   }, []);
-  console.log(page);
 
   const SortBy = () => {
     "name";
@@ -33,16 +30,13 @@ const Demo = () => {
     const pageValue = Number(e.target.value);
     setShowPerPage(pageValue);
   };
-  const filteredData = data.slice(page * showPerPage, (page + 1) * showPerPage);
   const header = ["No", "First Name", "Last Name", "Post", "City"];
   return (
     <>
       <div className="table_data">
         <Sorting handleSort={handleSort} reset={reset} />
-        <Table>
-          <Header header={header} />
-          <TableData filteredData={filteredData} />
-        </Table>
+        <Header header={header} />
+        <TableData data={data} page={page} showPerPage={showPerPage} />
       </div>
       <div className="main_pagination">
         <PagePagination
@@ -51,8 +45,8 @@ const Demo = () => {
           total={data.length}
           page={page}
           setPage={setPage}
+          changeOption={changeOption}
         />
-        <OptionData changeOption={changeOption} />
       </div>
     </>
   );

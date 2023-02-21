@@ -1,8 +1,9 @@
 import React from "react";
-
+import { Table } from "react-bootstrap";
 const Header = ({header}) => {
   return (
     <>
+    <Table>
     <thead>
       <tr>
         {header.map((item, index) => {
@@ -10,6 +11,7 @@ const Header = ({header}) => {
         })}
       </tr>
       </thead>
+      </Table>
     </>
   );
 };

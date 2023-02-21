@@ -7,6 +7,7 @@ const PagePagination = ({
   total,
   page,
   setPage,
+  changeOption,
 }) => {
   // eslint-disable-next-line no-unused-vars
   const [counter, setcounter] = useState(1);
@@ -44,6 +45,14 @@ const PagePagination = ({
             disabled={total / showPerPage === page}
           />
         </Pagination>
+      </div>
+      <div className="option_btn">
+        Page :
+        <select onChange={changeOption}>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={30}>30</option>
+        </select>
       </div>
     </>
   );

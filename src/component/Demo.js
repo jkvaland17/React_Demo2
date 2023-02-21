@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Table } from "react-bootstrap";
 import PagePagination from "./Pagination";
 import Data from "../component/Data.json";
 import TableData from "../component/TableData";
@@ -35,8 +36,10 @@ const Demo = () => {
     <>
       <div className="table_data">
         <Sorting handleSort={handleSort} reset={reset} />
+        <Table>
         <Header header={header} />
         <TableData data={data} page={page} showPerPage={showPerPage} />
+        </Table>
       </div>
       <div className="main_pagination">
         <PagePagination

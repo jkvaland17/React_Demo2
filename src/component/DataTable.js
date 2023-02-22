@@ -37,7 +37,7 @@ const DataTable = () => {
   };
   //pagination end
 
-  const header = ["No", "First Name", "Last Name", "Post", "City"];
+  const header = ["No1", "First Name", "Last Name", "Post", "City"];
 
   const SortBy = () => {
     "name";
